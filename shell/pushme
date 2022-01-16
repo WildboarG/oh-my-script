@@ -1,0 +1,67 @@
+#! /bin/bash
+## author : WildboarG
+## This pushplus script
+## token from pushplus
+function wcurl(){
+  token="d74df72e2dc246a186763f6798ec886e"
+  date=`date`
+  curl -X POST --header 'Content-Type: application/json' \
+          -d "{\"token\":\"$token\", 
+              \"title\":\"$tt\",
+	      \"template\":\"$template\",
+              \"content\":\"$msg\"}" \
+           "http://pushplus.hxtrip.com/send"
+}
+tt="defult_title"
+filename="arch_send"
+template="html"
+while getopts "f:m:t:p:h" opt;do
+	case $opt in
+		f)	
+			filename=$OPTARG
+			msg=$(cat $OPTARG)
+			ms=1
+		;;
+		t)
+			tt=$OPTARG
+		;;
+		p)
+			template=$OPTARG
+		;;
+		m)
+			msg=$OPTARG
+			ms=1
+		;;
+		h)	
+			hflog=1;
+   		;;
+		\?)	
+				
+			echo "[E]:ERROR USER"
+		;;
+	esac
+done
+
+if [ $ms ]
+then
+	echo "[F]filename:"$filename
+	echo "[T]title: "$tt
+	echo "[P]type:"$template
+	wcurl
+fi
+
+if [ $hflog ]
+then
+	echo "[H]push:  
+-t : 
+   add one title for your send message
+-m :
+   you can add message push to your wechat
+-f :
+   send file content to your wechat
+-p :
+   add you send file type,
+-h :
+   no help"
+fi
+
