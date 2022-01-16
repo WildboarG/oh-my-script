@@ -3,7 +3,7 @@
 ## This pushplus script
 ## token from pushplus
 function wcurl(){
-  token="d74df72e2dc246a186763f6798ec886e"
+  token="d74df72e*****86e"
   date=`date`
   curl -X POST --header 'Content-Type: application/json' \
           -d "{\"token\":\"$token\", 
